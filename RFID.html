@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RFID Simulator</title>
+    <style>
+        #rfid-reader {
+            width: 200px;
+            height: 200px;
+            background-color: #ccc;
+            margin: 20px auto;
+            text-align: center;
+            line-height: 200px;
+        }
+        
+        .card {
+            width: 100px;
+            height: 150px;
+            background-color: #f0f0f0;
+            border: 1px solid #aaa;
+            display: inline-block;
+            margin: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div id="rfid-reader">Drag a card here to read</div>
+    <div class="card" draggable="true" ondragstart="drag(event)">Card 1</div>
+    <div class="card" draggable="true" ondragstart="drag(event)">Card 2</div>
+    <div class="card" draggable="true" ondragstart="drag(event)">Card 3</div>
+
+    <script>
+        function drag(event) {
+            event.dataTransfer.setData("text", event.target.textContent);
+        }
+
+        document.getElementById("rfid-reader").ondragover = function(event) {
+            event.preventDefault();
+        };
+
+        document.getElementById("rfid-reader").ondrop = function(event) {
+            event.preventDefault();
+            var data = event.dataTransfer.getData("text");
+            var info = "";
+
+            // Generate random information based on the dragged card
+            switch(data) {
+                case "Card 1":
+                    info = "Name: John Doe\nAge: 30\nOccupation: Engineer";
+                    break;
+                case "Card 2":
+                    info = "Name: Jane Smith\nAge: 25\nOccupation: Doctor";
+                    break;
+                case "Card 3":
+                    info = "Name: Bob Johnson\nAge: 40\nOccupation: Artist";
+                    break;
+                default:
+                    info = "Unknown card";
+            }
+
+            document.getElementById("rfid-reader").textContent = info;
+        };
+    </script>
+</body>
+</html>

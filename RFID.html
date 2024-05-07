@@ -5,30 +5,54 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>RFID Simulator</title>
     <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f3f3f3;
+            margin: 0;
+            padding: 0;
+        }
+
+        #container {
+            max-width: 800px;
+            margin: 50px auto;
+            text-align: center;
+        }
+
         #rfid-reader {
             width: 200px;
             height: 200px;
-            background-color: #ccc;
-            margin: 20px auto;
+            background-color: #f0f0f0;
+            border: 2px dashed #999;
+            margin: 0 auto 20px auto;
             text-align: center;
             line-height: 200px;
+            font-size: 20px;
         }
-        
+
         .card {
-            width: 100px;
-            height: 150px;
-            background-color: #f0f0f0;
-            border: 1px solid #aaa;
+            width: 150px;
+            height: 100px;
+            background-color: #fff;
+            border: 2px solid #999;
+            border-radius: 10px;
             display: inline-block;
-            margin: 20px;
+            margin: 10px;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .card:hover {
+            transform: scale(1.05);
         }
     </style>
 </head>
 <body>
-    <div id="rfid-reader">Drag a card here to read</div>
-    <div class="card" draggable="true" ondragstart="drag(event)">Card 1</div>
-    <div class="card" draggable="true" ondragstart="drag(event)">Card 2</div>
-    <div class="card" draggable="true" ondragstart="drag(event)">Card 3</div>
+    <div id="container">
+        <div id="rfid-reader">Drag a card here to read</div>
+        <div class="card" draggable="true" ondragstart="drag(event)">Card 1</div>
+        <div class="card" draggable="true" ondragstart="drag(event)">Card 2</div>
+        <div class="card" draggable="true" ondragstart="drag(event)">Card 3</div>
+    </div>
 
     <script>
         function drag(event) {
@@ -47,19 +71,19 @@
             // Generate random information based on the dragged card
             switch(data) {
                 case "Card 1":
-                    info = "Name: John Doe\nAge: 30\nOccupation: Engineer";
+                    info = "Name: John Doe<br>Age: 30<br>Occupation: Engineer";
                     break;
                 case "Card 2":
-                    info = "Name: Jane Smith\nAge: 25\nOccupation: Doctor";
+                    info = "Name: Jane Smith<br>Age: 25<br>Occupation: Doctor";
                     break;
                 case "Card 3":
-                    info = "Name: Bob Johnson\nAge: 40\nOccupation: Artist";
+                    info = "Name: Bob Johnson<br>Age: 40<br>Occupation: Artist";
                     break;
                 default:
                     info = "Unknown card";
             }
 
-            document.getElementById("rfid-reader").textContent = info;
+            document.getElementById("rfid-reader").innerHTML = info;
         };
     </script>
 </body>
